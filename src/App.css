@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+	width: 7px;
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #123355;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #9fa838;
+}
+
+:root {
+	--color: #9fa838;
+}
+
+.ant-btn {
+	background-color: var(--color) !important;
+}
+
+.ant-btn:hover {
+	border-color: #9fa838 !important;
+}
+
+.ant-btn>span {
+	color: #fff !important;
+}
+
+.ant-scroll-number {
+	background-color: var(--color) !important;
+}
+
+.ant-menu-item-selected {
+	background-color: var(--color) !important;
+}
+
+.ant-select-selector {
+	width: 200px !important;
+}
+
+.ant-spin-dot-holder {
+	color: var(--color) !important;
+}
+
+.ant-input-affix-wrapper:hover {
+	border: 1px solid var(--color) !important;
+}
+
+.ant-input-affix-wrapper:focus {
+	border: 1px solid var(--color) !important;
+}
+
+.ant-input-affix-wrapper-focused {
+	border: 1px solid var(--color) !important;
+	box-shadow: 0, 0, 0, 2, var(--color) !important;
+}
+
+.ant-input-outlined:focus {
+	border: 1px solid var(--color) !important;
+	box-shadow: 0, 0, 0, 2, var(--color) !important;
+}
+
+.ant-pagination-item-active {
+	border: 1px solid #9fa838 !important;
+}
+
+.ant-pagination-item-active a {
+	color: #9fa838 !important;
+}
+
+.ant-switch.ant-switch-checked {
+	background: #9fa838 !important;
+}
+
+.delete-btn {
+	background-color: red !important;
+}
+
+.update-btn {
+	background-color: blue !important;
+}

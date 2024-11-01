@@ -1,0 +1,35 @@
+{
+  "organization": [
+    {
+      "key": "1",
+      "id": "1",
+      "name": "Najot Talim",
+      "inn": "123456789",
+      "director": "Ali Zairov",
+      "createdAt": "2018-05-13",
+      "address": "Toshkent shahar",
+      "status": "true"
+    },
+    {
+      "key": "2",
+      "id": "2",
+      "name": "Cambridge",
+      "inn": "987654321",
+      "director": "person",
+      "createdAt": "2014-07-12",
+      "address": "Toshkent shahar",
+      "status": "true"
+    },
+    {
+      "id": "1a2d",
+      "name": "adsadaa",
+      "inn": "1231345332",
+      "director": "sASasSdvdsfds",
+      "address": "qwadssdfsf",
+      "status": true,
+      "createdAt": "2023-04-03"
+    }
+  ],
+  "administration": [],
+  "students": []
+}

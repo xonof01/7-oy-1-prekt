@@ -1,4 +1,11 @@
 {
+  "users": [
+    {
+      "username": "Firdavs",
+      "password": "1027",
+      "id": "6611"
+    }
+  ],
   "organization": [
     {
       "key": "1",
@@ -9,6 +16,15 @@
       "createdAt": "2018-05-13",
       "address": "Toshkent shahar",
       "status": "true"
+    },
+    {
+      "id": "156d",
+      "name": "najot talim",
+      "inn": "12345678",
+      "director": "asdadsaa",
+      "address": "adadasd",
+      "status": true,
+      "createdAt": "2024-11-02"
     },
     {
       "key": "2",
@@ -29,7 +45,5 @@
       "status": true,
       "createdAt": "2023-04-03"
     }
-  ],
-  "administration": [],
-  "students": []
+  ]
 }

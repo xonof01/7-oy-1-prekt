@@ -1,18 +1,21 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
-import axios from 'axios'
 import { Button, Checkbox, DatePicker, Input } from 'antd'
 import { AppstoreAddOutlined, ArrowLeftOutlined, LoadingOutlined } from '@ant-design/icons'
 import { useAxios } from '../hook/useAxios'
+import dayjs from 'dayjs'
 
 function OrganizationAdd() {
+	const date = new Date()
+	const dateFormat = "YYYY-MM-DD";
+	const { id } = useParams()
 	const navigate = useNavigate()
 	const [name, setName] = useState("")
 	const [inn, setInn] = useState("")
 	const [director, setDirector] = useState("")
 	const [address, setAddress] = useState("")
-	const [createdAt, setCreatedAt] = useState("")
+	const [createdAt, setCreatedAt] = useState(`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, 0)}-${String(date.getDate()).padStart(2, 0)}`)
 	const [status, setStatus] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -20,15 +23,40 @@ function OrganizationAdd() {
 		e.preventDefault()
 		setIsLoading(true)
 		const data = { name, inn, director, address, status, createdAt }
-		toast.success("Jarayonda...")
-		useAxios().post("/organization", data).then(res => {
-			setTimeout(() => { toast.success("Saqlandi") }, 500)
-			setTimeout(() => {
-				setIsLoading(false)
-				navigate(-1)
-			}, 1000)
-		})
+		if (id) {
+			data.id = id
+			toast.success("Jarayonda...")
+			useAxios().put(`/organization/${id}`, data).then(res => {
+				setTimeout(() => { toast.success("Saqlandi") }, 500)
+				setTimeout(() => {
+					setIsLoading(false)
+					navigate(-1)
+				}, 1000)
+			})
+		} else {
+			toast.success("Jarayonda...")
+			useAxios().post("/organization", data).then(res => {
+				setTimeout(() => { toast.success("Saqlandi") }, 500)
+				setTimeout(() => {
+					setIsLoading(false)
+					navigate(-1)
+				}, 1000)
+			})
+		}
 	}
+
+	useEffect(() => {
+		if (id) {
+			useAxios().get(`/organization/${id}`).then(res => {
+				setName(res.data.name)
+				setInn(res.data.inn)
+				setDirector(res.data.director)
+				setAddress(res.data.address)
+				setStatus(res.data.status)
+				setCreatedAt(res.data.createdAt)
+			})
+		}
+	}, [])
 
 	return (
 		<form onSubmit={handleAddOrganization} className='p-5'>
@@ -36,9 +64,9 @@ function OrganizationAdd() {
 			<div className="flex items-center justify-between">
 				<div className="flex items-center space-x-5">
 					<ArrowLeftOutlined onClick={() => navigate(-1)} className='scale-[1.2] cursor-pointer' />
-					<h2 className="font-bold text-[22px] leading-[20px]">Tashkilot qoshish</h2>
+					<h2 className="font-bold text-[22px] leading-[20px]">Tashkilot {id ? "tahrirlash" : "qoshish"}</h2>
 				</div>
-				<Button htmlType='submit' icon={isLoading ? <LoadingOutlined /> : <AppstoreAddOutlined />} type='primary' size="large">Saqlash</Button>
+				<Button htmlType='submit' icon={isLoading ? <LoadingOutlined /> : <AppstoreAddOutlined />} type='primary' size="large">{id ? "Tahrirlash" : "Saqlash"}</Button>
 			</div>
 			<div className="mt-5 flex justify-between w-[70%]">
 				<div className="w-[49%] p-5 border-[1px] space-y-5 border-slate-400 rounded-[15px]">
@@ -62,7 +90,7 @@ function OrganizationAdd() {
 					</label>
 					<label className="flex flex-col">
 						<span className="text-[16px] mb-1 text-slate-500">Yaratilgan vaqt</span>
-						<DatePicker onChange={(a, b) => setCreatedAt(b)} size='large' placeholder="vaqtni kiriting" />
+						<DatePicker value={dayjs(createdAt, dateFormat)} onChange={(a, b) => setCreatedAt(b)} size='large' placeholder="vaqtni kiriting" />
 					</label>
 					<label className="flex flex-col">
 						<span className="text-[16px] mb-1 text-slate-500">Holati</span>

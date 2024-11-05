@@ -42,14 +42,12 @@ function Organization() {
 			dataIndex: 'action',
 		},
 	];
-
-	// search part start 
 	const [searchData, setSearchData] = useState("")
 	function handleSearchOrganization(e) {
 		setIsLoading(true)
 		setSearchData(e.target.value.toLowerCase())
 		if (!e.target.value) {
-			setTimeout(() => setRefresh(!refresh), 1000)
+			setTimeout(() => setRefresh(!refresh), 1200)
 		}
 	}
 	const searchByName = useDebounce(searchData, 1000)
@@ -57,20 +55,14 @@ function Organization() {
 		if (searchByName) {
 			setIsLoading(false)
 			const filteredData = tBodyData.filter(item => item.name.toLowerCase().includes(searchByName))
-			setSearchData(filteredData)
+			setTBodyData(filteredData)
 		}
 	}, [searchByName])
-	// search part end
-
-	// select part start 
 	const [innId, setInnId] = useState("")
 	function handleInnSelectChange(e) {
 		setIsLoading(true)
 		setTimeout(() => setInnId(e), 1000)
 	}
-	// select part end 
-
-	// delete part start 
 	const [deleteModal, setDeleteModal] = useState(false)
 	const [deleteId, setDeleteId] = useState(null)
 	function handleDelete(id) {
@@ -87,20 +79,23 @@ function Organization() {
 			}, 1000);
 		})
 	}
-	// delete part end
-
-	// axios get all start
+	function handleChangeSwitch(item, evt) {
+		item.status = evt
+		useAxios().put(`/organization/${item.id}`, item).then(res => {
+			setRefresh(!refresh)
+		})
+	}
 	useEffect(() => {
 		useAxios().get(`/organization?id=${innId ? innId : ""}`).then(res => {
 			setIsLoading(false)
 			setTBodyData(res.data.map((item, index) => {
 				item.action = <div className="flex items-center gap-[22px]">
-					<EditOutlined className='scale-[1.2] hover:scale-[1.5] duration-500 cursor-pointer hover:text-blue-600' />
+					<EditOutlined onClick={() => navigate(`/edit/${item.id}`)} className='scale-[1.2] hover:scale-[1.5] duration-500 cursor-pointer hover:text-blue-600' />
 					<DeleteOutlined onClick={() => handleDelete(item.id)} className='scale-[1.2] hover:scale-[1.5] duration-500 cursor-pointer hover:text-red-600' />
 					<DashOutlined onClick={() => navigate(`${item.id}`)} className='scale-[1.2] hover:scale-[1.5] duration-500 cursor-pointer hover:text-green-600' />
 				</div>
 				item.key = index + 1
-				item.status = <Switch size='small' defaultChecked={JSON.parse(item.status)} />
+				item.status = <Switch size='small' onChange={(evt) => handleChangeSwitch(item, evt)} checked={item.status} />
 				return item
 			}))
 		})

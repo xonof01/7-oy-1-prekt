@@ -17,11 +17,11 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #9fa838;
+	background: #c79113;
 }
 
 :root {
-	--color: #9fa838;
+	--color: #c79113;
 }
 
 .ant-btn {
@@ -29,7 +29,7 @@
 }
 
 .ant-btn:hover {
-	border-color: #9fa838 !important;
+	border-color: #c79113!important;
 }
 
 .ant-btn>span {
@@ -71,15 +71,15 @@
 }
 
 .ant-pagination-item-active {
-	border: 1px solid #9fa838 !important;
+	border: 1px solid  !important;
 }
 
 .ant-pagination-item-active a {
-	color: #9fa838 !important;
+	color:  #c79113 !important;
 }
 
 .ant-switch.ant-switch-checked {
-	background: #9fa838 !important;
+	background:  #c79113 !important;
 }
 
 .delete-btn {

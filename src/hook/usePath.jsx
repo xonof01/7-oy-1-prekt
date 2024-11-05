@@ -3,5 +3,8 @@ export const usePath = {
 	administration: "/admin",
 	students: "/students",
 	organizationAdd: "/organization/add",
-	organizationMore: "/:id"
+	organizationMore: "/:id",
+	organizationEdit: "/edit/:id",
+	signIn: "/",
+	signUp: "sign-up"
 }

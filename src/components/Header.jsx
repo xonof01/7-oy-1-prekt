@@ -4,6 +4,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Header() {
+	function handleLogOut() {
+		localStorage.clear()
+		location.pathname = "/"
+		location.reload()
+	}
 	return (
 		<div className='py-5 px-6 border-b-[1px] border-white bg-[#001529] flex items-center justify-between'>
 			<Link className='pl-1 flex items-center gap-[20px] text-white' to={"/"}>
@@ -14,7 +19,7 @@ function Header() {
 				<Badge count={5} size='small'>
 					<BellOutlined className='scale-[1.6] text-white'/>
 				</Badge>
-				<Button size='middle' type='primary'>Log out</Button>
+				<Button onClick={handleLogOut} size='middle' type='primary'>Log out</Button>
 			</div>
 		</div>
 	)
